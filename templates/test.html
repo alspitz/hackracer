@@ -3,8 +3,7 @@
   <form action="{{ url_for('hello') }}" method="post">
     <input type="hidden" name="id" value="{{challenge_id}}">
     <dd>{{ challenge_prompt }}
-    <dd><textarea name="code" rows="10" cols="80" maxlength=20000>
-        </textarea>
+    <dd><textarea name="code" rows="10" cols="80" maxlength=20000>{{challenge_header}}</textarea>
     <dd><input type="submit" value="Submit"/>
   </form>
 {% endblock %}

@@ -28,7 +28,9 @@ def hello():
     challenge_id = random.randint(0, len(challenges)-1)
     return render_template('test.html', \
                            challenge_prompt=challenges[challenge_id].text, \
-                           challenge_id=challenge_id)
+                           challenge_id=challenge_id, \
+                           challenge_header=challenges[challenge_id].header)
+
 
 @app.errorhandler(404)
 def page_not_found(e):
