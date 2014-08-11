@@ -8,8 +8,8 @@ class Challenge(object):
   def get_errors(self, solution):
     try:
       exec(solution)
-    except:
-      return "Does not compile."
+    except Exception, e:
+      return "Does not compile: %s" % e
 
     try:
       eval(self.fname)
@@ -25,13 +25,11 @@ class Challenge(object):
       try:
         ans = f(i)
       except Exception, e:
-        print e
-        return False
+        return False, str(e)
 
       if ans != o:
-        print "%s != %s (input=%s)" % (ans, o, i)
-        return False
-    return True
+        return False, "Input: %s; Expected: %s, received: %s" % (i, o, ans)
+    return True,
 
 challenges = []
 challenges.append(Challenge("Write a function sum_squares, that, given a list of integers, returns the sum of their squares", "sum_squares", [[1, 2, 3, 4], [0, 1, 10]], [30, 101]))

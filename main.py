@@ -12,16 +12,17 @@ app.config['DEBUG'] = True
 def hello():
   if request.method == "POST":
     challenge_id = int(request.form['id'])
-    challenge_code = request.form['code']
     challenge = challenges[challenge_id]
-    errors = challenge.get_errors(challenge_code)
+    code = request.form['code']
+    errors = challenge.get_errors(code)
     if errors:
       return errors
 
-    if challenges[challenge_id].check(challenge_code):
+    result = challenge.check(code)
+    if result[0]:
       return "Correct!"
     else:
-      return "Incorrect."
+      return "Incorrect.\n" + result[1]
 
   else:
     challenge_id = random.randint(0, len(challenges)-1)
